@@ -1,4 +1,4 @@
-NAME = brain
+NAME = sed
 
 # Sources
 SRC = $(shell ls *.cpp)
