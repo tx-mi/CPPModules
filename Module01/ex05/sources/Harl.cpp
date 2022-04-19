@@ -26,18 +26,6 @@ void Harl::error(void) {
 	std::cout << std::endl;
 }
 
-int  get_lvl(std::string level)
-{
-	const std::string names[] = {"DEBUG", "INFO", "WARNING", "ERROR", ""};
-
-	for (int i = 0; !names[i].empty(); i++)
-	{
-		if (!level.compare(names[i]))
-			return i + 1;
-	}
-	return -1;
-}
-
 void Harl::complain(std::string level) {
 	const std::string names[] = {"DEBUG", "INFO", "WARNING", "ERROR", ""};
 	void (Harl::*funcs[4]) () = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
