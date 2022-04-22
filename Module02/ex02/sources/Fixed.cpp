@@ -56,43 +56,48 @@ Fixed& Fixed::operator-=(const Fixed &obj) {
 }
 
 Fixed& Fixed::operator*=(const Fixed &obj) {
-    _value *= obj._value;
+    long copy;
 
-    return *this;
+    copy = (long)_value;
+    copy *= obj._value;
+    copy >>= _fractional_bits;
+    _value = (int)copy;
+    return (*this);
 }
 
 Fixed& Fixed::operator/=(const Fixed &obj) {
-    _value /= obj._value;
+    long a;
+    long b;
 
-    return *this;
+    a = _value << (_fractional_bits);
+    b = obj._value;
+    a /= b;
+    _value = (int)a;
+    return (*this);
 }
 
 Fixed Fixed::operator+(const Fixed &obj) const {
     Fixed ret(*this);
 
-    ret._value = ret._value + obj._value;
-    return ret;
+    return ret += obj;
 }
 
 Fixed Fixed::operator-(const Fixed &obj) const {
     Fixed ret(*this);
 
-    ret._value = ret._value - obj._value;
-    return ret;
+    return ret -= obj;
 }
 
 Fixed Fixed::operator*(const Fixed &obj) const {
     Fixed ret(*this);
 
-    ret._value = ret._value * obj._value;
-    return ret;
+    return ret *= obj;
 }
 
 Fixed Fixed::operator/(const Fixed &obj) const {
     Fixed ret(*this);
 
-    ret._value = ret._value / obj._value;
-    return ret;
+    return ret /= obj;
 }
 
 Fixed& Fixed::operator++() {
