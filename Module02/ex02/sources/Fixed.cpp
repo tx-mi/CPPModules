@@ -107,7 +107,7 @@ Fixed& Fixed::operator++() {
 }
 
 Fixed& Fixed::operator--() {
-    ++_value;
+    --_value;
 
     return *this;
 }
