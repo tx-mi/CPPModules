@@ -21,6 +21,11 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
     _attackDamage = 20;
 }
 
+ScavTrap& ScavTrap::operator=(const ScavTrap& scavtrap) {
+    ClapTrap::operator=(scavtrap);
+    return *this;
+}
+
 void ScavTrap::guardGate(void) {
     std::cout << "ScavTrap " << _name  << " have enterred"
           << " in Gate keeper mode\n";
@@ -38,6 +43,27 @@ void ScavTrap::getInfo(void) {
             << "ATTACK DAMAGE: " << this->_attackDamage << "\n";
 }
 
+void ScavTrap::takeDamage(unsigned int amount) {
+    _hitPoints -= amount;
+    std::cout << "ScavTrap " << _name
+            << " recieved " << amount
+            << " points of damage!" << std::endl
+            << "hit " << _hitPoints << std::endl;
+}
+
+void ScavTrap::beRepaired(unsigned int amount) {
+    if (_energyPoints > 0)
+    {
+        _energyPoints--;
+        _hitPoints += amount;
+        std::cout << "ScavTrap " << _name
+                << " has repaired himself! " << _energyPoints
+                << " energy points remains." << std::endl;
+    }
+    else
+        std::cout << "Not enough energy points!" << std::endl;
+
+}
 ScavTrap::~ScavTrap(void) {
     std::cout << "ScavTrap " << _name  << " is gone!\n";
 }
